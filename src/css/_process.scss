@@ -44,17 +44,19 @@
     }
 }
 
+.carousel-track {
+    display: flex;
+    width: 100%;
+    transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+    touch-action: pan-y;
+}
+
 .carousel-slide {
-    display: none;
+    display: grid;
+    grid-template-columns: 46% 54%;
+    flex: 0 0 100%;
     min-height: 520px;
     color: white;
-
-    // Only the active slide is rendered; the fade runs on every change.
-    &.active {
-        display: grid;
-        grid-template-columns: 46% 54%;
-        animation: carousel-fade 0.4s ease;
-    }
 
     img {
         width: 100%;
@@ -75,11 +77,21 @@
         text-align: left;
         flex-direction: column;
         justify-content: center;
+        opacity: 0.35;
+        transform: translateX(28px);
+        transition:
+            opacity 0.45s ease 0.2s,
+            transform 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.2s;
 
         p {
             margin: 0;
             color: $cream;
         }
+    }
+
+    &.active &__content {
+        opacity: 1;
+        transform: translateX(0);
     }
 
     @include respond-to('laptop') {
@@ -102,9 +114,7 @@
     @include respond-to('tablet') {
         min-height: 0;
 
-        &.active {
-            grid-template-columns: 1fr;
-        }
+        grid-template-columns: 1fr;
 
         img {
             height: 360px;
@@ -121,6 +131,35 @@
             padding: 30px;
             text-align: center;
         }
+    }
+}
+
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 22px;
+}
+
+.carousel-dot {
+    width: 10px;
+    height: 10px;
+    padding: 0;
+    border: 0;
+    border-radius: 999px;
+    background-color: rgba($espresso, 0.28);
+    cursor: pointer;
+    transition:
+        width 0.35s ease,
+        background-color 0.35s ease;
+
+    &.active {
+        width: 30px;
+        background-color: $caramel;
+    }
+
+    &:focus-visible {
+        @include focus-ring;
     }
 }
 
@@ -156,17 +195,5 @@
         width: 44px;
         height: 44px;
         font-size: 20px;
-    }
-}
-
-@keyframes carousel-fade {
-    from {
-        opacity: 0;
-        transform: translateX(18px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateX(0);
     }
 }
