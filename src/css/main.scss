@@ -1,1 +1,17 @@
-/* Your SCSS here. */
+// -----------------------------------------------------------------------------
+// Daily Brew Coffee — stylesheet entry point.
+//
+// Tokens and helpers first, then one partial per section of the page in the
+// same order the sections appear in the document.
+// -----------------------------------------------------------------------------
+
+@use 'base';
+@use 'header';
+@use 'hero';
+@use 'story';
+@use 'menu';
+@use 'process';
+@use 'origins';
+@use 'visit';
+@use 'footer';
+@use 'motion';

@@ -1,0 +1,65 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+// -----------------------------------------------------------------------------
+// Site footer and social media icons.
+// -----------------------------------------------------------------------------
+
+.site-footer {
+    width: 100%;
+    padding: 48px 0;
+    text-align: center;
+    background-color: $espresso;
+    color: white;
+
+    p {
+        margin-bottom: 8px;
+    }
+}
+
+.footer-social {
+    display: flex;
+    gap: 14px;
+    margin-top: 24px;
+    justify-content: center;
+}
+
+.social-link {
+    display: grid;
+    width: 46px;
+    height: 46px;
+    border: 2px solid rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    place-items: center;
+    color: white;
+    transition:
+        color 0.2s ease,
+        background-color 0.2s ease,
+        transform 0.2s ease;
+
+    &::before {
+        width: 22px;
+        height: 22px;
+        background-color: currentColor;
+        content: '';
+    }
+
+    &--github::before {
+        @include vector-icon('github', 22px, currentColor, $fixed-width: false);
+    }
+
+    &--x::before {
+        @include vector-icon('x', 22px, currentColor, $fixed-width: false);
+    }
+
+    &:hover,
+    &:focus-visible {
+        color: $espresso;
+        background-color: $cream;
+        transform: translateY(-3px);
+    }
+
+    &:focus-visible {
+        @include focus-ring(3px);
+    }
+}

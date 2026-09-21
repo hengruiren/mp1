@@ -1,0 +1,13 @@
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+
+    *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+
+    .hero-section { background-attachment: scroll; }
+
+    .coffee-card:hover, .carousel-button:hover, .social-link:hover,
+    .social-link:focus-visible { transform: none; }
+}

@@ -1,0 +1,101 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+// -----------------------------------------------------------------------------
+// Document defaults, typography and the layout primitives shared by sections.
+// -----------------------------------------------------------------------------
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: $header-offset;
+
+    @include respond-to('tablet') {
+        scroll-padding-top: 107px;
+    }
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: $text-color;
+    background-color: $light-cream;
+}
+
+h1,
+h2,
+p {
+    margin-top: 0;
+}
+
+h1 {
+    margin-bottom: 24px;
+    font-size: 56px;
+
+    @include respond-to('laptop') {
+        font-size: 48px;
+    }
+
+    @include respond-to('tablet') {
+        font-size: 40px;
+    }
+}
+
+h2 {
+    margin-bottom: 20px;
+    font-size: 38px;
+
+    @include respond-to('laptop') {
+        font-size: 34px;
+    }
+
+    @include respond-to('tablet') {
+        font-size: 30px;
+    }
+}
+
+p {
+    line-height: 1.7;
+}
+
+// Centred measure shared by every stripe.
+.container {
+    width: min(#{$content-width}, 100% - #{$gutter});
+    margin: 0 auto;
+}
+
+// Full-width horizontal stripe.
+.page-section {
+    display: flex;
+    width: 100%;
+    padding: 100px 0;
+    text-align: center;
+    justify-content: center;
+
+    @include respond-to('laptop') {
+        padding: 84px 0;
+    }
+
+    @include respond-to('tablet') {
+        padding: 72px 0;
+    }
+}
+
+// Small uppercase eyebrow above a section heading.
+.section-label {
+    margin-bottom: 12px;
+    color: $caramel;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+// The one lead paragraph a stripe opens with.
+.section-intro {
+    max-width: 720px;
+    margin: 0 auto;
+}

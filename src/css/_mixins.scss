@@ -1,0 +1,55 @@
+@use 'sass:map';
+@use 'variables' as *;
+
+// -----------------------------------------------------------------------------
+// Reusable pieces of SCSS logic shared by every component partial.
+// -----------------------------------------------------------------------------
+
+/// Look up an icon in the `$icons` map and return it as a CSS `url()`.
+/// @param {String} $name - a key of `$icons`
+@function icon-url($name) {
+    @if not map.has-key($icons, $name) {
+        @error 'Unknown icon "#{$name}". Available: #{map.keys($icons)}.';
+    }
+
+    @return url('#{map.get($icons, $name)}');
+}
+
+/// Wrap a block of declarations in a named max-width media query, so each
+/// component keeps its responsive rules next to its base rules.
+/// @param {String} $breakpoint - a key of `$breakpoints`
+@mixin respond-to($breakpoint) {
+    @if not map.has-key($breakpoints, $breakpoint) {
+        @error 'Unknown breakpoint "#{$breakpoint}". Available: #{map.keys($breakpoints)}.';
+    }
+
+    @media (max-width: map.get($breakpoints, $breakpoint)) {
+        @content;
+    }
+}
+
+/// Paint a scalable vector icon into a pseudo-element using a CSS mask, which
+/// keeps the icon sharp at any size and recolourable from CSS alone.
+/// @param {String} $name        - a key of `$icons`
+/// @param {Length} $size        - rendered square size
+/// @param {Color}  $color       - icon colour
+/// @param {Bool}   $fixed-width - reserve the icon's width in a flex row
+@mixin vector-icon($name, $size: 24px, $color: $coffee-brown, $fixed-width: true) {
+    content: '';
+    width: $size;
+    height: $size;
+
+    @if $fixed-width {
+        flex: 0 0 $size;
+    }
+
+    background-color: $color;
+    -webkit-mask: icon-url($name) center / contain no-repeat;
+    mask: icon-url($name) center / contain no-repeat;
+}
+
+/// Consistent keyboard focus ring.
+@mixin focus-ring($offset: 4px) {
+    outline: 3px solid $caramel;
+    outline-offset: $offset;
+}

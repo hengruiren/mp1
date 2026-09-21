@@ -1,0 +1,100 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+// -----------------------------------------------------------------------------
+// Coffee origins: three-column card grid, one per growing region.
+// -----------------------------------------------------------------------------
+
+.origins-section {
+    background-color: $origins-sand;
+}
+
+.origins-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    margin-top: 44px;
+    text-align: left;
+
+    @include respond-to('laptop') {
+        gap: 18px;
+    }
+
+    @include respond-to('tablet') {
+        grid-template-columns: 1fr;
+    }
+}
+
+.origin-card {
+    overflow: hidden;
+    border-radius: 18px;
+    background-color: $origin-cream;
+    box-shadow: $shadow-card;
+
+    &__content {
+        padding: 28px;
+
+        h3 {
+            margin: 0 0 16px;
+            font-size: 28px;
+        }
+
+        p {
+            margin: 0 0 22px;
+        }
+
+        // Two classes, so this beats the `p` rule above without `:not()`.
+        .origin-region {
+            margin: 0 0 8px;
+            color: $caramel;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        @include respond-to('laptop') {
+            padding: 22px;
+
+            h3 {
+                font-size: 24px;
+            }
+        }
+    }
+}
+
+.origin-map {
+    display: flex;
+    height: 300px;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+    background-color: $origin-cream;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+    @include respond-to('laptop') {
+        height: 240px;
+    }
+}
+
+.flavor-list {
+    display: flex;
+    padding: 0;
+    margin: 0;
+    flex-wrap: wrap;
+    gap: 8px;
+    list-style: none;
+
+    li {
+        padding: 7px 11px;
+        border-radius: 999px;
+        background-color: $cream;
+        font-size: 13px;
+        font-weight: bold;
+    }
+}

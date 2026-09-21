@@ -1,0 +1,116 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+// -----------------------------------------------------------------------------
+// "Our story" stripe: looping background video behind a two-column layout.
+// -----------------------------------------------------------------------------
+
+.story-section {
+    position: relative;
+    overflow: hidden;
+    background-color: $cream;
+
+    // Tint that keeps the copy readable over the video.
+    &::after {
+        position: absolute;
+        z-index: 1;
+        inset: 0;
+        background-color: rgba($cream, 0.22);
+        content: '';
+    }
+}
+
+.story-background-video {
+    position: absolute;
+    z-index: 0;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.story-layout {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: minmax(260px, 0.8fr) minmax(0, 1.2fr);
+    gap: 64px;
+    align-items: center;
+
+    @include respond-to('laptop') {
+        gap: 44px;
+    }
+
+    @include respond-to('tablet') {
+        grid-template-columns: 1fr;
+        gap: 36px;
+    }
+}
+
+.story-logo {
+    width: min(100%, 300px);
+    margin: 0 auto;
+    display: flex;
+    padding: 18px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 24px;
+    background-color: rgba($light-cream, 0.97);
+    box-shadow: $shadow-panel;
+
+    img {
+        display: block;
+        width: min(100%, 340px);
+        height: auto;
+    }
+
+    @include respond-to('tablet') {
+        width: min(100%, 280px);
+        margin: 0 auto;
+    }
+}
+
+.story-video-toggle {
+    margin-top: 24px;
+    padding: 12px 18px;
+    border: 1px solid $coffee-brown;
+    border-radius: 999px;
+    background: $light-cream;
+    color: $coffee-brown;
+    font: inherit;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+
+    &:hover { background: $coffee-brown; color: $light-cream; }
+    &:focus-visible { @include focus-ring; }
+}
+
+.story-copy {
+    padding: 36px;
+    border-radius: 24px;
+    background-color: rgba($light-cream, 0.97);
+    box-shadow: $shadow-panel;
+    text-align: left;
+
+    // Two classes, so this wins over the `p` rule below without `:not()`.
+    .section-label {
+        margin-bottom: 12px;
+    }
+
+    p {
+        max-width: none;
+        margin: 0 0 18px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    @include respond-to('laptop') {
+        padding: 30px;
+    }
+
+    @include respond-to('tablet') {
+        text-align: center;
+    }
+}

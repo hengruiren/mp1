@@ -1,0 +1,49 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+// -----------------------------------------------------------------------------
+// "Visit us" stripe: an HTML5 video plus address and opening hours.
+// -----------------------------------------------------------------------------
+
+.visit-section {
+    background-color: $visit-sand;
+}
+
+.visit-video {
+    width: min(100%, 960px);
+    margin: 36px auto 32px;
+    overflow: hidden;
+    border-radius: 24px;
+    background-color: $espresso;
+    box-shadow: $shadow-video;
+
+    video {
+        display: block;
+        width: 100%;
+        max-height: 560px;
+        object-fit: cover;
+    }
+}
+
+.visit-details {
+    display: grid;
+    gap: 12px;
+    justify-content: center;
+}
+
+.visit-detail {
+    display: flex;
+    margin: 0;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    // Scalable vector icons, masked from the `$icons` map.
+    &--location::before {
+        @include vector-icon('location');
+    }
+
+    &--hours::before {
+        @include vector-icon('clock');
+    }
+}

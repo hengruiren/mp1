@@ -1,0 +1,28 @@
+@use 'variables' as *;
+
+// -----------------------------------------------------------------------------
+// Landing stripe: fixed-attachment background image, vertically centred content.
+// -----------------------------------------------------------------------------
+
+.hero-section {
+    min-height: 70vh;
+    align-items: center;
+    background-color: $coffee-brown;
+    color: white;
+    background-image:
+        linear-gradient($overlay-espresso, $overlay-espresso),
+        url('../assets/our-story-background.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+
+    .section-label {
+        color: $hero-label;
+    }
+
+    h1,
+    p {
+        text-shadow: 0 2px 8px rgba(47, 27, 18, 0.65);
+    }
+}
